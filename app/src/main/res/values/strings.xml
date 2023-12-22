@@ -43,4 +43,10 @@
         libero vel nunc consequat, quis tincidunt nisl eleifend. Cras bibendum enim a justo luctus
         vestibulum. Fusce dictum libero quis erat maximus, vitae volutpat diam dignissim.
     </string>
+    <string name="tv_name_example">Evil Morty</string>
+    <string name="tv_status_example">Alive</string>
+    <string name="tv_hyphen">-</string>
+    <string name="tv_species_example">Human</string>
+    <string name="tv_last_known_location">Last known location:</string>
+    <string name="tv_location">Earth</string>
 </resources>

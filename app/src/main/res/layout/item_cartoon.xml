@@ -20,50 +20,58 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="12dp"
-        android:text="Evil Morty"
-        android:textColor="@color/white"
+        android:text="@string/tv_name_example"
+        android:textColor="@color/text_color_selector"
+        android:clickable="true"
         android:textSize="28sp"
         app:layout_constraintStart_toEndOf="@id/img_character"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:focusable="true" />
 
     <TextView
         android:id="@+id/tv_status"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Alive"
-        android:textColor="@color/white"
+        android:text="@string/tv_status_example"
+        android:textColor="@color/text_color_selector"
+        android:clickable="true"
         android:textSize="16sp"
         android:layout_marginStart="12dp"
         app:layout_constraintStart_toEndOf="@id/img_character"
-        app:layout_constraintTop_toBottomOf="@id/tv_character_name" />
+        app:layout_constraintTop_toBottomOf="@id/tv_character_name"
+        android:focusable="true"/>
 
     <TextView
         android:id="@+id/tv_hyphen"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="-"
-        android:textColor="@color/white"
+        android:text="@string/tv_hyphen"
+        android:textColor="@color/text_color_selector"
+        android:clickable="true"
         android:textSize="16sp"
         app:layout_constraintStart_toEndOf="@id/tv_status"
         app:layout_constraintTop_toBottomOf="@id/tv_character_name"
-        app:layout_constraintEnd_toStartOf="@id/tv_species"/>
+        app:layout_constraintEnd_toStartOf="@id/tv_species"
+        android:focusable="true"/>
 
     <TextView
         android:id="@+id/tv_species"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Human"
-        android:textColor="@color/white"
+        android:text="@string/tv_species_example"
+        android:textColor="@color/text_color_selector"
+        android:clickable="true"
         android:textSize="16sp"
         android:layout_marginStart="12dp"
         app:layout_constraintStart_toEndOf="@id/tv_status"
-        app:layout_constraintTop_toBottomOf="@id/tv_character_name" />
+        app:layout_constraintTop_toBottomOf="@id/tv_character_name"
+        android:focusable="true"/>
 
     <TextView
         android:id="@+id/tv_location"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Last known location:"
+        android:text="@string/tv_last_known_location"
         android:textColor="#919092"
         android:textSize="14sp"
         android:layout_marginStart="12dp"
@@ -75,10 +83,12 @@
         android:id="@+id/tv_location_info"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Earth"
-        android:textColor="@color/white"
+        android:text="@string/tv_location"
+        android:textColor="@color/text_color_selector"
+        android:clickable="true"
         android:textSize="16sp"
         android:layout_marginStart="12dp"
         app:layout_constraintStart_toEndOf="@id/img_character"
-        app:layout_constraintTop_toBottomOf="@id/tv_location" />
+        app:layout_constraintTop_toBottomOf="@id/tv_location"
+        android:focusable="true"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
