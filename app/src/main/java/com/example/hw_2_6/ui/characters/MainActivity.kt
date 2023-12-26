@@ -25,7 +25,6 @@ class MainActivity : AppCompatActivity() {
             cartoonAdapter.submitList(it)
             setupCharactersRecycler()
         }
-        //binding.recyclerView.adapter = cartoonAdapter
     }
 
     private fun setupCharactersRecycler() = with(binding.recyclerView){

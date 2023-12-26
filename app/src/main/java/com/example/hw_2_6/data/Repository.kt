@@ -7,7 +7,9 @@ import retrofit2.Callback
 import retrofit2.Response
 import javax.inject.Inject
 
-class Repository @Inject constructor(private val api: CartoonApiService) {
+class Repository @Inject constructor(
+    private val api: CartoonApiService
+) {
 
     fun getCharacters(): MutableLiveData<List<Character>> {
         val cartoon = MutableLiveData<List<Character>>()
@@ -19,7 +21,6 @@ class Repository @Inject constructor(private val api: CartoonApiService) {
                         cartoon.postValue(it.results)
                     }
                 }
-                Log.d("onResponse", "данные пришли")
             }
 
             override fun onFailure(call: Call<BaseResponse<Character>>, t: Throwable) {
@@ -39,7 +40,6 @@ class Repository @Inject constructor(private val api: CartoonApiService) {
                         cartoon.postValue(it)
                     }
                 }
-                Log.d("onResponseSecondActivity", "данные на второй активити не пришли")
             }
 
             override fun onFailure(call: Call<Character>, t: Throwable) {
