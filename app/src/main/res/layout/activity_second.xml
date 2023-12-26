@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="#272B33"
     android:padding="12dp"
-    tools:context=".ui.SecondActivity">
+    tools:context=".ui.characterDetails.SecondActivity">
 
     <ImageView
         android:id="@+id/img_character"
@@ -23,22 +23,36 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="12dp"
         android:focusable="true"
+        android:clickable="true"
         android:text="@string/tv_name_example"
         android:textColor="@color/text_color_selector"
         android:textSize="28sp"
+        android:textStyle="bold"
         app:layout_constraintStart_toEndOf="@id/img_character"
         app:layout_constraintTop_toTopOf="@id/img_character" />
+
+    <ImageView
+        android:id="@+id/img_indicator"
+        android:layout_width="10dp"
+        android:layout_height="10dp"
+        android:layout_marginStart="12dp"
+        android:background="@drawable/indicator_unknown"
+        app:layout_constraintBottom_toBottomOf="@id/tv_status"
+        app:layout_constraintEnd_toStartOf="@id/tv_status"
+        app:layout_constraintStart_toEndOf="@id/img_character"
+        app:layout_constraintTop_toTopOf="@id/tv_status" />
 
     <TextView
         android:id="@+id/tv_status"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="12dp"
+        android:layout_marginStart="4dp"
         android:focusable="true"
+        android:clickable="true"
         android:text="@string/tv_status_example"
         android:textColor="@color/text_color_selector"
         android:textSize="16sp"
-        app:layout_constraintStart_toEndOf="@id/img_character"
+        app:layout_constraintStart_toEndOf="@id/img_indicator"
         app:layout_constraintTop_toBottomOf="@id/tv_character_name" />
 
     <TextView
@@ -46,6 +60,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:focusable="true"
+        android:clickable="true"
         android:text="@string/tv_hyphen"
         android:textColor="@color/text_color_selector"
         android:textSize="16sp"
@@ -57,8 +72,9 @@
         android:id="@+id/tv_species"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="12dp"
+        android:layout_marginStart="16dp"
         android:focusable="true"
+        android:clickable="true"
         android:text="@string/tv_species_example"
         android:textColor="@color/text_color_selector"
         android:textSize="16sp"
