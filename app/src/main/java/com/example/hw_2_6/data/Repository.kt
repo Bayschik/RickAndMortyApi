@@ -11,20 +11,21 @@ class Repository @Inject constructor(
     private val api: CartoonApiService
 ) {
 
-    fun getCharacters(): MutableLiveData<List<Character>> {
-        val cartoon = MutableLiveData<List<Character>>()
+    fun getCharacters(): MutableLiveData<Resource<List<Character>>> {
+        val cartoon = MutableLiveData<Resource<List<Character>>>()
+        cartoon.postValue(Resource.Loading())
 
         api.getCharacters().enqueue(object : Callback<BaseResponse<Character>> {
             override fun onResponse(call: Call<BaseResponse<Character>>, response: Response<BaseResponse<Character>>) {
                 if (response.isSuccessful && response.body() != null) {
                     response.body()?.let {
-                        cartoon.postValue(it.results)
+                        cartoon.postValue(Resource.Success(it.results))
                     }
                 }
             }
 
             override fun onFailure(call: Call<BaseResponse<Character>>, t: Throwable) {
-                Log.e("onFailure", "данные не пришли")
+                cartoon.postValue(Resource.Error(t.localizedMessage ?: "Непредвиденная ошибка"))
             }
         })
         return cartoon
