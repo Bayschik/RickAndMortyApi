@@ -1,7 +1,6 @@
 package com.example.hw_2_6.ui.characterDetails
 
 import android.os.Bundle
-import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
 import com.example.hw_2_6.R
@@ -9,12 +8,11 @@ import com.example.hw_2_6.data.Character
 import com.example.hw_2_6.databinding.ActivitySecondBinding
 import com.example.hw_2_6.ui.Indicator
 import com.example.hw_2_6.ui.utils.CartoonKeys
-import dagger.hilt.android.AndroidEntryPoint
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
-@AndroidEntryPoint
 class SecondActivity : AppCompatActivity() {
     private lateinit var binding: ActivitySecondBinding
-    private val viewModel by viewModels<CharacterDetailsViewModel>()
+    private val viewModel by viewModel<CharacterDetailsViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

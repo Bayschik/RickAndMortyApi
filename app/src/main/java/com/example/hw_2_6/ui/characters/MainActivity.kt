@@ -3,7 +3,6 @@ package com.example.hw_2_6.ui.characters
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
-import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -12,12 +11,11 @@ import com.example.hw_2_6.databinding.ActivityMainBinding
 import com.example.hw_2_6.recycler.CartoonAdapter
 import com.example.hw_2_6.ui.characterDetails.SecondActivity
 import com.example.hw_2_6.ui.utils.CartoonKeys
-import dagger.hilt.android.AndroidEntryPoint
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
-@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
-    private val viewModel: ViewModel by viewModels()
+    private val viewModel: ViewModel by viewModel()
     private val cartoonAdapter by lazy {CartoonAdapter(this::onClickItem)}
 
     override fun onCreate(savedInstanceState: Bundle?) {
