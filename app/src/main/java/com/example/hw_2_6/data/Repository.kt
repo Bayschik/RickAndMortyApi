@@ -1,6 +1,5 @@
 package com.example.hw_2_6.data
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.liveData
 import kotlinx.coroutines.Dispatchers
@@ -21,17 +20,16 @@ class Repository(private val api: CartoonApiService) {
         }
     }
 
-    fun getCharacterDetails(id: Int): LiveData<Character> = liveData(Dispatchers.IO) {
-
+    fun getCharacterDetails(id: Int): LiveData<Resource<Character>> = liveData(Dispatchers.IO) {
         try {
             val cartoon = api.getCharacterDetails(id)
             if (cartoon.isSuccessful) {
                 cartoon.body()?.let {
-                    emit(it)
+                    emit(Resource.Success(it))
                 }
             }
         } catch (ex: Exception) {
-            Log.e("failure", "getCharacterDetails")
+            emit(Resource.Error(ex.localizedMessage ?: "Unknown Error"))
         }
 
     }
