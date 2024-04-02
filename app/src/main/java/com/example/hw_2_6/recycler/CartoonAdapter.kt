@@ -30,6 +30,12 @@ class CartoonAdapter(
     override fun onBindViewHolder(holder: CartoonViewHolder, position: Int) {
         holder.bind(getItem(position))
     }
+
+    fun addImages(newImages: List<Character>){
+        val lastIndex = currentList.size
+        currentList.addAll(newImages)
+        notifyItemRangeInserted(lastIndex, newImages.size)
+    }
 }
 
 class CartoonViewHolder(

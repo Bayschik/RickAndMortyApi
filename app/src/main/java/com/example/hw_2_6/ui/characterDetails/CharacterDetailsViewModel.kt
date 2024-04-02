@@ -9,6 +9,5 @@ import com.example.hw_2_6.data.Resource
 class CharacterDetailsViewModel(
     private val repository: Repository
 ) : ViewModel() {
-    fun getCharacterDetails(sendId: Int): LiveData<Resource<Character>> =
-        repository.getCharacterDetails(sendId)
+    fun getCharacterDetails(sendId: Int): LiveData<Resource<Character>> = repository.getCharacterDetails(sendId)
 }
