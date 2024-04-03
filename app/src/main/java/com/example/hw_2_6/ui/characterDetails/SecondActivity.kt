@@ -1,6 +1,7 @@
 package com.example.hw_2_6.ui.characterDetails
 
 import android.os.Bundle
+import androidx.lifecycle.viewModelScope
 import com.bumptech.glide.Glide
 import com.example.hw_2_6.R
 import com.example.hw_2_6.data.Character
@@ -8,6 +9,7 @@ import com.example.hw_2_6.databinding.ActivitySecondBinding
 import com.example.hw_2_6.ui.Indicator
 import com.example.hw_2_6.ui.base.BaseActivity
 import com.example.hw_2_6.ui.utils.CartoonKeys
+import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class SecondActivity : BaseActivity() {
@@ -21,11 +23,13 @@ class SecondActivity : BaseActivity() {
 
         val activityId = intent.getIntExtra(CartoonKeys.CHARACTER_ID_ARG, 0)
 
-        viewModel.getCharacterDetails(activityId).stateHandler(
-            success = {
-                setupCharacterData(it)
-            }
-        )
+        viewModel.viewModelScope.launch {
+            viewModel.getCharacterDetails(activityId).stateHandler(
+                success = {
+                    setupCharacterData(it)
+                }
+            )
+        }
     }
     private fun setupCharacterData(receiveData: Character) = with(binding) {
         tvCharacterName.text = receiveData.name

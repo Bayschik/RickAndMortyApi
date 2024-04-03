@@ -4,6 +4,7 @@ import android.content.Intent
 import android.nfc.tech.MifareUltralight.PAGE_SIZE
 import android.os.Bundle
 import androidx.core.view.isVisible
+import androidx.lifecycle.viewModelScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.hw_2_6.data.Resource
@@ -12,6 +13,7 @@ import com.example.hw_2_6.recycler.CartoonAdapter
 import com.example.hw_2_6.ui.base.BaseActivity
 import com.example.hw_2_6.ui.characterDetails.SecondActivity
 import com.example.hw_2_6.ui.utils.CartoonKeys
+import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainActivity : BaseActivity() {
@@ -26,14 +28,16 @@ class MainActivity : BaseActivity() {
         setContentView(binding.root)
         setupCharactersRecycler()
 
-        viewModel.getCharacters().stateHandler(
-            success = {
-                cartoonAdapter.reloadImages(it)
-            },
-            state = { state ->
-                binding.progressBar.isVisible = state is Resource.Loading
-            }
-        )
+        viewModel.viewModelScope.launch {
+            viewModel.getCharacters().stateHandler(
+                success = {
+                    cartoonAdapter.reloadImages(it)
+                },
+                state = { state ->
+                    binding.progressBar.isVisible = state is Resource.Loading
+                }
+            )
+        }
 
         imageScroll()
     }
@@ -59,14 +63,16 @@ class MainActivity : BaseActivity() {
     }
 
     private fun requestImage() {
-        viewModel.getNextPage(page).stateHandler(
-            success = {
-                cartoonAdapter.addImages(it)
-            },
-            state = { state ->
-                binding.progressBar.isVisible = state is Resource.Loading
-            }
-        )
+        viewModel.viewModelScope.launch {
+            viewModel.getNextPage(page).stateHandler(
+                success = {
+                    cartoonAdapter.addImages(it)
+                },
+                state = { state ->
+                    binding.progressBar.isVisible = state is Resource.Loading
+                }
+            )
+        }
     }
 
     private fun setupCharactersRecycler() = with(binding.recyclerView) {
