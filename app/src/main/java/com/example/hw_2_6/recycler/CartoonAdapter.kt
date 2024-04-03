@@ -2,7 +2,7 @@ package com.example.hw_2_6.recycler
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.RecyclerView.Adapter
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.bumptech.glide.Glide
 import com.example.hw_2_6.R
@@ -11,9 +11,9 @@ import com.example.hw_2_6.databinding.ItemCartoonBinding
 import com.example.hw_2_6.ui.Indicator
 
 class CartoonAdapter(
-    private val onClick: (characterId: Int) -> Unit
-) :androidx.recyclerview.widget.ListAdapter<Character, CartoonViewHolder>(
-    CartoonDiffCallback()
+    private val onClick: (characterId: Int) -> Unit,
+    private val list:MutableList<Character>
+) :Adapter<CartoonViewHolder>(
 ) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CartoonViewHolder {
@@ -26,16 +26,26 @@ class CartoonAdapter(
         )
     }
 
+    override fun getItemCount() = list.size
+
 
     override fun onBindViewHolder(holder: CartoonViewHolder, position: Int) {
-        holder.bind(getItem(position))
+        holder.bind(list[position])
     }
 
     fun addImages(newImages: List<Character>){
-        val lastIndex = currentList.size
-        currentList.addAll(newImages)
+        val lastIndex = list.size
+        list.addAll(newImages)
         notifyItemRangeInserted(lastIndex, newImages.size)
     }
+
+    fun reloadImages(newImages: List<Character>){
+        list.clear()
+        list.addAll(newImages)
+        notifyItemInserted(list.lastIndex)
+    }
+
+
 }
 
 class CartoonViewHolder(
@@ -56,11 +66,4 @@ class CartoonViewHolder(
             Indicator.DEAD.toString() -> imgIndicator.setBackgroundResource(R.drawable.indicator_dead)
         }
     }
-}
-
-class CartoonDiffCallback:DiffUtil.ItemCallback<Character>(){
-    override fun areItemsTheSame(oldItem: Character, newItem: Character) = oldItem.id == newItem.id
-
-    override fun areContentsTheSame(oldItem: Character, newItem: Character) = oldItem == newItem
-
 }

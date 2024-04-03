@@ -9,6 +9,10 @@ class Repository(private val api: CartoonApiService):BaseRepository() {
         api.getCharacters().body()?.results ?: emptyList()
     }
 
+    fun getNextPage(page:Int): LiveData<Resource<List<Character>>> = performRequest {
+        api.getNextPage(page).body()?.results ?: emptyList()
+    }
+
     fun getCharacterDetails(id: Int): LiveData<Resource<Character>> = performRequest {
         api.getCharacterDetails(id).body()!!
     }

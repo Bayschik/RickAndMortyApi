@@ -18,7 +18,7 @@ class MainActivity : BaseActivity() {
     private lateinit var binding: ActivityMainBinding
     private val viewModel: ViewModel by viewModel()
     private var page = 1
-    private val cartoonAdapter by lazy { CartoonAdapter(this::onClickItem) }
+    private val cartoonAdapter by lazy { CartoonAdapter(this::onClickItem, mutableListOf()) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,7 +28,7 @@ class MainActivity : BaseActivity() {
 
         viewModel.getCharacters().stateHandler(
             success = {
-                cartoonAdapter.submitList(it)
+                cartoonAdapter.reloadImages(it)
             },
             state = { state ->
                 binding.progressBar.isVisible = state is Resource.Loading
@@ -59,6 +59,14 @@ class MainActivity : BaseActivity() {
     }
 
     private fun requestImage() {
+        viewModel.getNextPage(page).stateHandler(
+            success = {
+                cartoonAdapter.addImages(it)
+            },
+            state = { state ->
+                binding.progressBar.isVisible = state is Resource.Loading
+            }
+        )
     }
 
     private fun setupCharactersRecycler() = with(binding.recyclerView) {
